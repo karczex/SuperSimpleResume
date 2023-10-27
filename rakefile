@@ -1,0 +1,16 @@
+# Rakefile
+$NAME = "resume"
+$margin_size = 5
+$margins = "-V margin-top=#{$margin_size} -V margin-left=#{$margin_size} -V margin-right=#{$margin_size} -V margin-bottom=#{$margin_size} " 
+$paper = "-V papersize=a4"
+task default: [:clean]
+
+task :clean do
+    puts "Cleaning workspace"
+    `rm -f *.pdf`
+end
+
+task :pdf do
+    puts "Building pdf "
+    `pandoc --verbose -t html #{$margins} #{$paper} --css style.css --output #{$NAME}.pdf #{$NAME}.md`
+end
